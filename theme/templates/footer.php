@@ -16,6 +16,6 @@
             <a href="/pages/about">About</a>
             <a href="https://github.com/NimbusCMS/nimbus">GitHub</a>
         </nav>
-        <p class="weight">This page ships 0&nbsp;KB of JavaScript.</p>
+        <p class="weight">Zero JavaScript · one ~11&nbsp;KB stylesheet · system fonts.</p>
     </div>
 </footer>
