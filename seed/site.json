@@ -1,5 +1,5 @@
 {
-  "_note": "Declarative seed for nimbuscms.dev. Applied over MCP by seed/seed.php (idempotent). Entry field values live under `fields` (mirrors the create_/update_ tool contract). Each `slug` must equal what the title derives to: MCP create_{handle} currently ignores an explicit slug and always derives it from the title (a recorded core finding — see the repo README), so set slug = the title's derivation for idempotent re-seeding. Body fields are 'textarea' in this scaffold; they switch to the Markdown plugin's 'markdown' type in the theme slice, when that plugin ships in the site image.",
+  "_note": "Declarative seed for nimbuscms.dev. Applied over MCP by seed/seed.php (idempotent). Entry field values live under `fields` (mirrors the create_/update_ tool contract). Each `slug` is honored as given (normalized + made unique by core; nimbus #174) — set it independently of the title. Body fields are 'textarea' in this scaffold; they switch to the Markdown plugin's 'markdown' type in the theme slice, when that plugin ships in the site image.",
   "settings": {
     "site.title": "NimbusCMS",
     "site.description": "A lightweight PHP CMS an agent can run — and a human can read."

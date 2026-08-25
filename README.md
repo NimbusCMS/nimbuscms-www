@@ -52,7 +52,8 @@ The token needs `schema:write`, `settings:write`, and content `*:read,*:write`
 
 - **create_collection singleton parity** — MCP couldn't create a singleton; fixed
   in core ([nimbus #173](https://github.com/NimbusCMS/nimbus/pull/173)).
-- **create_{handle} ignores an explicit `slug`** — the tool advertises a `slug`
-  input but always derives the slug from the title. Until fixed in core, each
-  entry's seed `slug` must equal its title's derivation (that's why the slugs here
-  mirror the titles). Recorded for a small core follow-up.
+- **create_{handle} ignored an explicit `slug`** — the tool advertised a `slug`
+  input but always derived the slug from the title. Fixed in core
+  ([nimbus #174](https://github.com/NimbusCMS/nimbus/pull/174)): an explicit slug
+  is now honored (normalized + made unique), so seed slugs can be set
+  independently of titles.
