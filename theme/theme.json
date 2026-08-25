@@ -1,0 +1,15 @@
+{
+    "name": "NimbusCMS.dev",
+    "version": "0.1.0",
+    "description": "The theme for nimbuscms.dev — plain PHP, one hand-written stylesheet, zero JavaScript, system fonts. It lives the site's own performance claim.",
+    "templates": {
+        "layout": "HTML shell; includes header and footer.",
+        "header": "Site header with the broom mark + wordmark and the main menu.",
+        "footer": "Footer with links and the page's own measured weight.",
+        "entry-home": "The landing page (the `home` singleton).",
+        "entry": "A prose/legal page (a `pages` entry) — a centered reading column.",
+        "collection": "A collection index.",
+        "404": "Themed not-found page."
+    },
+    "specialization": "entry-home renders the home singleton; add entry-docs / collection-docs for the docs surface."
+}
