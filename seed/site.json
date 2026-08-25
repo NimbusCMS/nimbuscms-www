@@ -1,10 +1,12 @@
 {
-  "_note": "Declarative seed for nimbuscms.dev. Applied over MCP by seed/seed.php (idempotent). Entry field values live under `fields` (mirrors the create_/update_ tool contract). Each `slug` is honored as given (normalized + made unique by core; nimbus #174) — set it independently of the title. Body fields are 'textarea' in this scaffold; they switch to the Markdown plugin's 'markdown' type in the theme slice, when that plugin ships in the site image.",
+  "_note": "Declarative seed for nimbuscms.dev, applied over MCP by seed/seed.php (idempotent). The home singleton is inline under `entries`; docs and pages are authored as Markdown files with frontmatter under `content/` (seed reads them). Body is rendered by the theme's tiny Markdown renderer — no plugin needed.",
   "settings": {
     "site.title": "NimbusCMS",
     "site.description": "A lightweight PHP CMS an agent can run — and a human can read."
   },
-  "home_setting": { "site.home": "home" },
+  "home_setting": {
+    "site.home": "home"
+  },
   "collections": [
     {
       "handle": "home",
@@ -13,9 +15,21 @@
       "icon": "🏠",
       "description": "The landing page (a singleton, served at /).",
       "fields": [
-        { "handle": "tagline", "label": "Tagline", "type": "text" },
-        { "handle": "subhead", "label": "Subhead", "type": "textarea" },
-        { "handle": "body", "label": "Body", "type": "textarea" }
+        {
+          "handle": "tagline",
+          "label": "Tagline",
+          "type": "text"
+        },
+        {
+          "handle": "subhead",
+          "label": "Subhead",
+          "type": "textarea"
+        },
+        {
+          "handle": "body",
+          "label": "Body",
+          "type": "textarea"
+        }
       ]
     },
     {
@@ -24,10 +38,26 @@
       "icon": "📖",
       "description": "Versioned documentation (v0.1). Grouped by section, ordered.",
       "fields": [
-        { "handle": "body", "label": "Body", "type": "textarea" },
-        { "handle": "section", "label": "Section", "type": "text" },
-        { "handle": "order", "label": "Order", "type": "number" },
-        { "handle": "summary", "label": "Summary", "type": "text" }
+        {
+          "handle": "body",
+          "label": "Body",
+          "type": "textarea"
+        },
+        {
+          "handle": "section",
+          "label": "Section",
+          "type": "text"
+        },
+        {
+          "handle": "order",
+          "label": "Order",
+          "type": "number"
+        },
+        {
+          "handle": "summary",
+          "label": "Summary",
+          "type": "text"
+        }
       ]
     },
     {
@@ -36,8 +66,16 @@
       "icon": "📄",
       "description": "Prose and legal pages.",
       "fields": [
-        { "handle": "body", "label": "Body", "type": "textarea" },
-        { "handle": "summary", "label": "Summary", "type": "text" }
+        {
+          "handle": "body",
+          "label": "Body",
+          "type": "textarea"
+        },
+        {
+          "handle": "summary",
+          "label": "Summary",
+          "type": "text"
+        }
       ]
     }
   ],
@@ -53,52 +91,10 @@
           "body": "NimbusCMS is a small, standalone content management system. It renders fast server-side HTML, exposes a scoped read+write API, and lets an agent operate it over the Model Context Protocol — the same rules, one backend."
         }
       }
-    ],
-    "docs": [
-      {
-        "slug": "installation",
-        "title": "Installation",
-        "status": "published",
-        "fields": {
-          "section": "Getting Started",
-          "order": 1,
-          "summary": "Clone, configure, migrate.",
-          "body": "Install NimbusCMS with Docker or a PHP 8.2+ environment, copy the example environment file, and run the installer to create the schema and your first administrator."
-        }
-      },
-      {
-        "slug": "first-content",
-        "title": "First content",
-        "status": "published",
-        "fields": {
-          "section": "Getting Started",
-          "order": 2,
-          "summary": "Collections, fields, entries.",
-          "body": "Define a collection (a content type), add fields, and create entries — in the admin, over the API, or by asking an agent through MCP."
-        }
-      },
-      {
-        "slug": "driving-nimbus-with-an-agent",
-        "title": "Driving Nimbus with an agent",
-        "status": "published",
-        "fields": {
-          "section": "Guides",
-          "order": 1,
-          "summary": "The MCP control surface and the built-in agent guide.",
-          "body": "Point any MCP client at Nimbus with a scoped token. The server ships its own operating guide (initialize instructions + nimbus://guide/core), so an agent knows how to define content types, write content, and manage the site — bounded by the token's scopes."
-        }
-      }
-    ],
-    "pages": [
-      {
-        "slug": "about",
-        "title": "About",
-        "status": "published",
-        "fields": {
-          "summary": "What NimbusCMS is, and what it is not.",
-          "body": "NimbusCMS is an opinionated-about-architecture, unopinionated-about-what-you-build CMS. It is deliberately small: a stable core, explicit reusable capabilities, optional plugins, and application-owned business logic."
-        }
-      }
     ]
+  },
+  "content": {
+    "docs": "content/docs",
+    "pages": "content/pages"
   }
 }

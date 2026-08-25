@@ -93,6 +93,57 @@ function say(string $line): void
     fwrite(STDOUT, $line . "\n");
 }
 
+/**
+ * Parse a Markdown file with `--- key: value ---` frontmatter into an entry:
+ * `{slug, title, status, fields:{section, order, summary, body}}`. Frontmatter
+ * keys title/slug/status are entry-level; the rest become fields; the body after
+ * the frontmatter is `fields.body`.
+ *
+ * @return array<string,mixed>
+ */
+function entryFromMarkdown(string $file): array
+{
+    $raw = (string) file_get_contents($file);
+    $fm  = [];
+    $body = $raw;
+    if (preg_match('/^---\s*\n(.*?)\n---\s*\n?(.*)$/s', $raw, $m)) {
+        foreach (explode("\n", $m[1]) as $line) {
+            if (preg_match('/^([A-Za-z0-9_]+):\s*(.*)$/', trim($line), $kv)) {
+                $fm[$kv[1]] = trim($kv[2], " \"'");
+            }
+        }
+        $body = $m[2];
+    }
+    $fields = ['body' => rtrim($body) . "\n"];
+    foreach (['section', 'summary'] as $k) {
+        if (isset($fm[$k])) {
+            $fields[$k] = $fm[$k];
+        }
+    }
+    if (isset($fm['order'])) {
+        $fields['order'] = (int) $fm['order'];
+    }
+    return [
+        'slug'   => $fm['slug'] ?? basename($file, '.md'),
+        'title'  => $fm['title'] ?? basename($file, '.md'),
+        'status' => $fm['status'] ?? 'published',
+        'fields' => $fields,
+    ];
+}
+
+/**
+ * All entries authored as Markdown files under a directory, ordered by their
+ * `order` field then filename.
+ *
+ * @return list<array<string,mixed>>
+ */
+function entriesFromDir(string $dir): array
+{
+    $files = glob(rtrim($dir, '/') . '/*.md') ?: [];
+    sort($files);
+    return array_map('entryFromMarkdown', $files);
+}
+
 // --- handshake (also surfaces a bad token early) -----------------------------
 rpc('initialize', []);
 say('Connected to ' . $url);
@@ -125,32 +176,40 @@ foreach ($seed['collections'] ?? [] as $collection) {
 // --- 2. entries (match by slug: update if present, else create) --------------
 // Field values live under `fields`; title/slug/status/published_at are top-level
 // (the create_/update_ tool contract). `version` comes back as a sibling of
-// `data` on a read, and update_ needs it (optimistic concurrency).
+// `data` on a read, and update_ needs it (optimistic concurrency). Entries come
+// from `entries` (inline, structured) and `content` (dirs of Markdown files).
+$upsert = static function (string $handle, array $entry): void {
+    $slug   = (string) ($entry['slug'] ?? '');
+    $fields = is_array($entry['fields'] ?? null) ? $entry['fields'] : [];
+    $status = $entry['status'] ?? 'published';
+
+    [$found, $missing] = call("get_{$handle}", ['slug' => $slug]);
+    if (!$missing && isset($found['version'])) {
+        [$res, $err] = call("update_{$handle}", ['slug' => $slug, 'version' => $found['version'], 'status' => $status, 'fields' => $fields]);
+        $verb = 'updated';
+    } else {
+        $args = ['title' => $entry['title'] ?? $slug, 'slug' => $slug, 'status' => $status, 'fields' => $fields];
+        if (isset($entry['published_at'])) {
+            $args['published_at'] = $entry['published_at'];
+        }
+        [$res, $err] = call("create_{$handle}", $args);
+        $verb = 'created';
+    }
+    if ($err) {
+        fwrite(STDERR, "entry {$handle}/{$slug}: FAILED — " . ($res['error']['message'] ?? 'unknown') . "\n");
+        exit(1);
+    }
+    say("entry {$handle}/{$slug}: {$verb}");
+};
+
 foreach ($seed['entries'] ?? [] as $handle => $entries) {
     foreach ($entries as $entry) {
-        $slug   = (string) ($entry['slug'] ?? '');
-        $fields = is_array($entry['fields'] ?? null) ? $entry['fields'] : [];
-        $status = $entry['status'] ?? 'published';
-
-        [$found, $missing] = call("get_{$handle}", ['slug' => $slug]);
-
-        if (!$missing && isset($found['version'])) {
-            $args = ['slug' => $slug, 'version' => $found['version'], 'status' => $status, 'fields' => $fields];
-            [$res, $err] = call("update_{$handle}", $args);
-            $verb = 'updated';
-        } else {
-            $args = ['title' => $entry['title'] ?? $slug, 'slug' => $slug, 'status' => $status, 'fields' => $fields];
-            if (isset($entry['published_at'])) {
-                $args['published_at'] = $entry['published_at'];
-            }
-            [$res, $err] = call("create_{$handle}", $args);
-            $verb = 'created';
-        }
-        if ($err) {
-            fwrite(STDERR, "entry {$handle}/{$slug}: FAILED — " . ($res['error']['message'] ?? 'unknown') . "\n");
-            exit(1);
-        }
-        say("entry {$handle}/{$slug}: {$verb}");
+        $upsert($handle, $entry);
+    }
+}
+foreach ($seed['content'] ?? [] as $handle => $dir) {
+    foreach (entriesFromDir(dirname($file) . '/' . $dir) as $entry) {
+        $upsert($handle, $entry);
     }
 }
 

@@ -20,16 +20,14 @@ $renderField = static function (mixed $value) use ($e): string {
     if (is_bool($value)) {
         return $value ? 'Yes' : 'No';
     }
-    // Textarea/text body: paragraphs on blank lines, <br> within.
     if (is_scalar($value)) {
-        $paras = preg_split('/\n{2,}/', trim((string) $value)) ?: [];
-        return implode('', array_map(static fn (string $p): string => '<p>' . nl2br($e($p)) . '</p>', $paras));
+        return nl2br($e((string) $value));
     }
     return '';
 };
 $fields = $entry['fields'] ?? [];
-$body   = $fields['body'] ?? null;
-unset($fields['body'], $fields['summary']); // summary is meta, body rendered last
+$body   = (string) ($fields['body'] ?? '');
+unset($fields['body'], $fields['summary']); // summary is meta; body renders as Markdown last
 ?>
 <article class="prose">
   <div class="measure">
@@ -43,7 +41,7 @@ unset($fields['body'], $fields['summary']); // summary is meta, body rendered la
         <?php $r = $renderField($value); ?>
         <?php if ($r !== ''): ?><div class="field field-<?= $e($handle) ?>"><?= $r ?></div><?php endif; ?>
       <?php endforeach; ?>
-      <?= $renderField($body) ?>
+      <?= $partial('markdown', ['text' => $body]) ?>
     </div>
     <a class="back-link" href="/">← Home</a>
   </div>

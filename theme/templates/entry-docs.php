@@ -8,8 +8,6 @@
  * @var callable $partial
  * @var callable $e
  */
-$body = (string) ($entry['fields']['body'] ?? '');
-$paras = $body === '' ? [] : (preg_split('/\n{2,}/', trim($body)) ?: []);
 ?>
 <div class="docs">
   <div class="wrap docs-grid">
@@ -18,7 +16,7 @@ $paras = $body === '' ? [] : (preg_split('/\n{2,}/', trim($body)) ?: []);
       <p class="kicker">Docs <span class="version-badge">v0.1</span></p>
       <h1><?= $e($entry['title']) ?></h1>
       <div class="body">
-        <?php foreach ($paras as $p): ?><p><?= nl2br($e($p)) ?></p><?php endforeach; ?>
+        <?= $partial('markdown', ['text' => (string) ($entry['fields']['body'] ?? '')]) ?>
       </div>
       <p class="back-link"><a href="/docs">← All docs</a></p>
     </article>
