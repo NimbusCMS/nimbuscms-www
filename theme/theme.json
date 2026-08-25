@@ -2,6 +2,7 @@
     "name": "NimbusCMS.dev",
     "version": "0.1.0",
     "description": "The theme for nimbuscms.dev — plain PHP, one hand-written stylesheet, zero JavaScript, system fonts. It lives the site's own performance claim.",
+    "nav": ["docs"],
     "templates": {
         "layout": "HTML shell; includes header and footer.",
         "header": "Site header with the broom mark + wordmark and the main menu.",
