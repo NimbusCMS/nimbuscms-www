@@ -45,6 +45,12 @@ if ($announcement !== null) {
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+<?php if (\Nimbus\Support\Config::demo()): ?>
+    <div class="demo-banner">
+        🧹 <strong>Live demo.</strong> A public NimbusCMS sandbox — everyone shares it and it resets hourly, so nothing here is permanent.
+        <a href="/admin">Sign in</a> with <code>demo@nimbuscms.dev</code> / <code>explore-nimbus-demo</code> to try the admin.
+    </div>
+<?php endif; ?>
 <?php if ($announcementText !== null && $announcementText !== ''): ?>
     <div class="announcement"><?= $e($announcementText) ?></div>
 <?php endif; ?>
