@@ -54,6 +54,34 @@ if (str_contains($tagline, '—')) {
   </div>
 </section>
 
+<section id="demos" class="demos" aria-labelledby="demos-title">
+  <div class="wrap">
+    <p class="kicker" id="demos-title">See it running</p>
+    <h2>Three real sites, one small core</h2>
+    <p class="demos-lede">Each demo below is a live NimbusCMS install — the same core, with different collections, plugins and a theme of its own. Open one and poke around.</p>
+    <div class="demos-grid">
+      <a class="demo-card" href="https://ras.nimbuscms.dev" target="_blank" rel="noopener">
+        <span class="demo-tag">Restaurant</span>
+        <h3>The Copper Table</h3>
+        <p>A restaurant floor: live tables, kitchen tickets, orders and reservations, a public menu and online ordering. Sign in as any role to watch the capability model in action.</p>
+        <span class="demo-go">Open demo &rarr;</span>
+      </a>
+      <a class="demo-card" href="https://foodmart.nimbuscms.dev" target="_blank" rel="noopener">
+        <span class="demo-tag">Grocery</span>
+        <h3>Foodmart</h3>
+        <p>An online grocery: inventory as the source of truth, a shoppable storefront with search, filters and availability, and a working cart through to checkout.</p>
+        <span class="demo-go">Open demo &rarr;</span>
+      </a>
+      <a class="demo-card" href="https://demo.nimbuscms.dev" target="_blank" rel="noopener">
+        <span class="demo-tag">Coffee shop</span>
+        <h3>Fern &amp; Kettle</h3>
+        <p>A neighbourhood caf&eacute; site: menu, opening hours and story, rendered by a plain-PHP theme over the very same core.</p>
+        <span class="demo-go">Open demo &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="features-section" aria-labelledby="features-title">
   <div class="wrap">
     <p class="kicker">Built in</p>
