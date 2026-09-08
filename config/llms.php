@@ -23,10 +23,14 @@ docker compose exec app php bin/nimbus install
 ```
 
 `install` runs the migrations and creates the first admin (it prints the
-credentials). The site is then live at http://localhost:8080 (admin at /admin).
-If a port is in use, add a `docker-compose.override.yml` remapping the published
-ports. No `composer install` is needed in development: the runtime has no
-third-party packages.
+credentials). If the database refuses the connection on a cold first boot, wait a
+few seconds and re-run `install` (the DB is still starting). The site is then live
+at http://localhost:8080 (admin at /admin).
+
+If a port is already in use, set `APP_PORT`, `ADMINER_PORT` or `DB_HOST_PORT` in
+`.env` before `docker compose up` (and match `APP_URL` to `APP_PORT`) — the compose
+file reads those. No `composer install` is needed in development: the runtime has
+no third-party packages.
 
 ## Model content and drive it as an agent
 
