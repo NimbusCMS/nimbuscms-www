@@ -40,6 +40,7 @@ if ($announcement !== null) {
     <?php endif; ?>
     <meta property="og:type" content="<?= $e($meta['og_type'] ?? 'website') ?>">
     <meta name="twitter:card" content="summary">
+    <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
     <?= $head ?? '' ?>
     <link rel="stylesheet" href="/theme/assets/app.css">
 </head>
