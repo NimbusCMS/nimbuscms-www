@@ -139,6 +139,9 @@ code, pre { font-family: var(--font-mono); }
 .copy-btn:hover { color: var(--ink); border-color: var(--ink-muted); }
 .agent-prompt .copy-btn { top: var(--sp-3); }
 .fineprint { margin-top: var(--sp-4); font-size: var(--fs-xs); color: var(--ink-muted); }
+.hero-proof { margin-top: var(--sp-5); font-size: var(--fs-s); color: var(--ink-muted); max-width: 52ch; }
+.hero-proof strong { color: var(--ink); font-weight: 650; }
+.hero-proof-link { font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 .agent-cue { margin-top: var(--sp-5); font-size: var(--fs-s); color: var(--ink-muted); }
 .agent-cue::before { content: "🤖 "; }
 .agent-prompt { display: block; white-space: pre-wrap; word-break: break-word; max-width: 64ch; line-height: 1.55; margin-top: var(--sp-2); }
