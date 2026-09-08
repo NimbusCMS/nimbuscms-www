@@ -57,8 +57,8 @@ if (str_contains($tagline, '—')) {
 <section id="demos" class="demos" aria-labelledby="demos-title">
   <div class="wrap">
     <p class="kicker" id="demos-title">See it running</p>
-    <h2>Three real sites, one small core</h2>
-    <p class="demos-lede">Each demo below is a live NimbusCMS install — the same core, with different collections, plugins and a theme of its own. Open one and poke around.</p>
+    <h2>Live, on the same small core</h2>
+    <p class="demos-lede">Each card opens a live NimbusCMS install — the same core, with different collections, plugins and a theme of its own. Three sites, plus the blog plugin running on the restaurant. Poke around.</p>
     <div class="demos-grid">
       <a class="demo-card" href="https://ras.nimbuscms.dev" target="_blank" rel="noopener">
         <span class="demo-tag">Restaurant</span>
@@ -76,6 +76,12 @@ if (str_contains($tagline, '—')) {
         <span class="demo-tag">Coffee shop</span>
         <h3>Fern &amp; Kettle</h3>
         <p>A neighbourhood caf&eacute; site: menu, opening hours and story, rendered by a plain-PHP theme over the very same core.</p>
+        <span class="demo-go">Open demo &rarr;</span>
+      </a>
+      <a class="demo-card" href="https://ras.nimbuscms.dev/blog" target="_blank" rel="noopener">
+        <span class="demo-tag">Blog plugin</span>
+        <h3>The Copper Table Journal</h3>
+        <p>The official Blog plugin on the restaurant demo: per-post SEO, an RSS feed and tag archives, and cross-posting to Dev.to and Hashnode driven over MCP.</p>
         <span class="demo-go">Open demo &rarr;</span>
       </a>
     </div>
