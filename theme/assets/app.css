@@ -128,7 +128,16 @@ code, pre { font-family: var(--font-mono); }
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-s);
   padding: var(--sp-2) var(--sp-4); overflow-x: auto; max-width: 100%; white-space: nowrap;
 }
+.install { position: relative; }
 .install .prompt { color: var(--ink-muted); user-select: none; }
+.copy-btn {
+  position: absolute; top: var(--sp-2); right: var(--sp-2);
+  font-family: var(--font-sans); font-size: var(--fs-xs); font-weight: 600;
+  color: var(--ink-muted); background: var(--bg); border: 1px solid var(--line);
+  border-radius: var(--radius-s); padding: 0.2rem 0.55rem; cursor: pointer;
+}
+.copy-btn:hover { color: var(--ink); border-color: var(--ink-muted); }
+.agent-prompt .copy-btn { top: var(--sp-3); }
 .fineprint { margin-top: var(--sp-4); font-size: var(--fs-xs); color: var(--ink-muted); }
 .agent-cue { margin-top: var(--sp-5); font-size: var(--fs-s); color: var(--ink-muted); }
 .agent-cue::before { content: "🤖 "; }
