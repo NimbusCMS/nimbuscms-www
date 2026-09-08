@@ -34,8 +34,10 @@ Content lives in collections you define. You can model and fill them entirely
 over the API/MCP with a scoped token (no admin UI required):
 
 ```
-docker compose exec app php bin/nimbus token:create --name=agent --scopes=schema:write,*:read,*:write
+docker compose exec app php bin/nimbus token:create --name=agent --scopes='schema:write,*:read,*:write'
 ```
+
+(Quote the scopes so your shell doesn't expand the `*`.)
 
 Then connect to the MCP endpoint at `<your-site>/api/v1/mcp` (or stdio
 `php bin/nimbus mcp`) and read the built-in operating guide, the MCP resource
@@ -45,7 +47,7 @@ Then connect to the MCP endpoint at `<your-site>/api/v1/mcp` (or stdio
 - Per-collection tools (`create_<handle>`, `list_<handle>`, `get_<handle>`, ...)
   appear automatically once the collection exists, generated from your fields.
 - Published entries are served over the theme (`/<handle>`, `/<handle>/<slug>`)
-  and the read API (`/api/v1/collections/<handle>/entries`).
+  and the read API (`/api/v1/collections/<handle>/entries`, which also needs the token).
 
 Every surface (admin, API, MCP) runs on the same audited, scope-checked services,
 so an agent can operate the whole CMS with nothing installed but a token.
