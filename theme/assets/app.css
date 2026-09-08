@@ -130,6 +130,10 @@ code, pre { font-family: var(--font-mono); }
 }
 .install .prompt { color: var(--ink-muted); user-select: none; }
 .fineprint { margin-top: var(--sp-4); font-size: var(--fs-xs); color: var(--ink-muted); }
+.agent-cue { margin-top: var(--sp-5); font-size: var(--fs-s); color: var(--ink-muted); }
+.agent-cue::before { content: "🤖 "; }
+.agent-prompt { display: block; white-space: pre-wrap; word-break: break-word; max-width: 64ch; line-height: 1.55; margin-top: var(--sp-2); }
+.agent-prompt code { white-space: inherit; }
 
 /* ---------- Claims band ---------- */
 .claims { border-block: 1px solid var(--line); background: var(--surface); padding-block: var(--sp-7); }
