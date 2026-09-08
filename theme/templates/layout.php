@@ -60,5 +60,6 @@ if ($announcement !== null) {
     <?= $__content ?>
 </main>
 <?= $partial('footer') ?>
+<script src="/theme/assets/copy.js" defer></script>
 </body>
 </html>
