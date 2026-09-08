@@ -27,6 +27,8 @@ if (str_contains($tagline, '—')) {
       <a class="btn btn-secondary" href="https://github.com/NimbusCMS/nimbus">View the source</a>
     </div>
     <pre class="install"><code><span class="prompt">$</span> git clone https://github.com/NimbusCMS/nimbus &amp;&amp; cd nimbus &amp;&amp; docker compose up</code></pre>
+    <p class="agent-cue">Or hand it to your AI agent &mdash; paste this:</p>
+    <pre class="install agent-prompt"><code>Set up NimbusCMS for me: read https://nimbuscms.dev/llms.txt and follow it to clone and run it with Docker, then create a "posts" collection with one published entry and give me the local URL.</code></pre>
     <p class="fineprint">This page ships zero JavaScript. Turn it off — nothing changes.</p>
   </div>
 </section>
